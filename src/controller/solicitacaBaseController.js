@@ -14,7 +14,7 @@ const createSolictacao = async (req, res) => {
     const solicitacao = await solicitacaoBaseServices.createSolictacao(
       req.body
     );
-    res.status(200).send(solicitacao);
+    res.status(201).send(solicitacao);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }

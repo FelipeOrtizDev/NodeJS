@@ -12,7 +12,7 @@ const getAllEnderecos = async (req, res) => {
 const createEndereco = async (req, res) => {
   try {
     const enderecos = await EnderecoService.createEndereco(req.body);
-    res.status(200).send(enderecos);
+    res.status(201).send(enderecos);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }

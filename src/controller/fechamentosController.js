@@ -12,7 +12,7 @@ const getFechamentos = async (req, res) => {
 const createFechamentos = async (req, res) => {
   try {
     const fechamentos = await fechamentosServices.createFechamentos(req.body);
-    res.status(200).send(fechamentos);
+    res.status(201).send(fechamentos);
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "Erro ao criar Fechamento", error });

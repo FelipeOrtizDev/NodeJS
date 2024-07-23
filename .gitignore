@@ -1,0 +1,35 @@
+# Comentários começam com o símbolo de cerquilha (#)
+# Este é um exemplo de arquivo .gitignore
+
+# node_modules
+node_modules
+
+# Ignorar arquivos de compilação
+*.o
+*.pyc
+*.class
+
+# Ignorar diretórios de saída de build
+/bin/
+/out/
+/target/
+
+# Ignorar arquivos de log
+*.log
+*.lock
+*.tmp
+
+# Ignorar arquivos específicos
+debug.log
+important.log
+
+# Ignorar diretórios específicos
+/logs/
+.idea/
+
+# Ignorar arquivos gerados pelo sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar .env
+.env

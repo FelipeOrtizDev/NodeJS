@@ -1,9 +1,7 @@
 const Fastify = require("fastify");
 const cors = require("@fastify/cors");
 const { connectDatabase } = require("./db/database");
-const fehcamentosRoutes = require("./routes/fechamentosRoutes");
-const solicitacaoRoutes = require("./routes/solicitacaoBaseRoutes");
-const enderecoRoutes = require("./routes/EnderecoRoutes");
+const ApiRoutes = require("./routes/ApiRoutes");
 
 const server = Fastify();
 
@@ -17,9 +15,7 @@ server.register(cors, {
 const start = async () => {
   try {
     await connectDatabase();
-    await fehcamentosRoutes(server);
-    await solicitacaoRoutes(server);
-    await enderecoRoutes(server);
+    await ApiRoutes(server);
     server.listen({
       port: port,
       listenTextResolver: (adress) => {

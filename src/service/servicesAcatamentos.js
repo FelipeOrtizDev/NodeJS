@@ -1,36 +1,36 @@
 const SB_Acatamentos = require("../model/acatamento");
-const SB_Fechamentos = require("../model/fechamento");
+const SB_SolicitacaoBase = require("../model/solicitacaoBase");
 
 class ServiceAcatamento {
   getAllAcatamento = async () => {
     try {
       const acatamentos = await SB_Acatamentos.findAll({
-        include: [SB_Fechamentos],
+        include: [SB_SolicitacaoBase],
       });
       return acatamentos;
     } catch (error) {
-      throw new Error("Erro ao buscar acatamento" + error.message);
+      throw new Error("Erro ao buscar acatamentos: " + error.message);
     }
   };
 
   createAcatamento = async (data) => {
     try {
-      const fechamentosExist = await SB_Fechamentos.findOne({
+      const solicitacaoBaseExist = await SB_SolicitacaoBase.findOne({
         where: {
-          id_Fechamentos: data.SB_Fechamentos_id_Fechamentos,
-          SB_SolicitacaoBase_id_SolicitacaoBase:
-            data.SB_Fechamentos_SB_SolicitacaoBase_id_SolicitacaoBase,
-          SB_SolicitacaoBase_SB_Enderecos_id_Endereco:
-            data.SB_Fechamentos_SB_SolicitacaoBase_SB_Enderecos_id_Endereco,
+          id_SolicitacaoBase: data.SB_SolicitacaoBase_id_SolicitacaoBase,
+          SB_Enderecos_id_Endereco:
+            data.SB_SolicitacaoBase_SB_Enderecos_id_Endereco,
         },
       });
-      if (!fechamentosExist) {
-        throw new Error("fechamento referenciado não existe");
+
+      if (!solicitacaoBaseExist) {
+        throw new Error("SolicitacaoBase referenciada não existe");
       }
-      const acatamentos = await SB_Acatamentos.create(data);
-      return acatamentos;
+
+      const acatamento = await SB_Acatamentos.create(data);
+      return acatamento;
     } catch (error) {
-      throw new Error("Erro ao criar acatamento" + error.message);
+      throw new Error("Erro ao criar acatamento: " + error.message);
     }
   };
 
@@ -41,17 +41,20 @@ class ServiceAcatamento {
           id_Acatamentos: id,
         },
       });
+
       if (!updated) {
         throw new Error("Acatamento não encontrado");
       }
+
       const updatedAcatamento = await SB_Acatamentos.findOne({
         where: {
           id_Acatamentos: id,
         },
       });
+
       return updatedAcatamento;
     } catch (error) {
-      throw new Error("Error ao atualizar acatamento" + error.message);
+      throw new Error("Erro ao atualizar acatamento: " + error.message);
     }
   };
 
@@ -62,12 +65,14 @@ class ServiceAcatamento {
           id_Acatamentos: id,
         },
       });
+
       if (!deleted) {
         throw new Error("Acatamento não encontrado");
       }
+
       return true;
     } catch (error) {
-      throw new Error("Erro ao deletar Acamento" + error.message);
+      throw new Error("Erro ao deletar acatamento: " + error.message);
     }
   };
 }

@@ -42,6 +42,10 @@ SB_Endereco.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    SB_Cruzamento: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     SB_SetorAbastecimento: {
       type: DataTypes.STRING,
       allowNull: false,

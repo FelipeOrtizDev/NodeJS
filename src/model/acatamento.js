@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db/database");
-const SB_Fechamentos = require("./fechamento");
+const SB_SolicitacaoBase = require("./solicitacaoBase");
 
 class SB_Acatamentos extends Model {}
 
@@ -11,28 +11,36 @@ SB_Acatamentos.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    SB_DataAcatamento: DataTypes.DATE,
-    SB_PrvisaoAcatamento: DataTypes.TIME,
-    SB_EquipeResponsavel: DataTypes.STRING,
-    SB_Fechamentos_id_Fechamentos: {
+    SB_DataAcatamento: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    SB_PrvisãoAcatamento: {
+      type: DataTypes.TIME,
+      allowNull: false,
+    },
+    SB_EquipeResponsavel: {
+      type: DataTypes.STRING(75),
+      allowNull: false,
+    },
+    SB_ObservacaoAcatamento: {
+      type: DataTypes.STRING(250),
+      allowNull: true,
+    },
+    SB_SolicitacaoBase_id_SolicitacaoBase: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
-        model: SB_Fechamentos,
-        key: "id_Fechamentos",
+        model: SB_SolicitacaoBase,
+        key: "id_SolicitacaoBase",
       },
     },
-    SB_Fechamentos_SB_SolicitacaoBase_id_SolicitacaoBase: {
+    SB_SolicitacaoBase_SB_Enderecos_id_Endereco: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
-        model: SB_Fechamentos,
-        key: "SB_SolicitacaoBase_id_SolicitacaoBase",
-      },
-    },
-    SB_Fechamentos_SB_SolicitacaoBase_SB_Enderecos_id_Endereco: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: SB_Fechamentos,
-        key: "SB_SolicitacaoBase_SB_Enderecos_id_Endereco",
+        model: SB_SolicitacaoBase,
+        key: "SB_Enderecos_id_Endereco",
       },
     },
   },
@@ -44,17 +52,14 @@ SB_Acatamentos.init(
   }
 );
 
-SB_Acatamentos.belongsTo(SB_Fechamentos, {
-  foreignKey: "SB_Fechamentos_id_Fechamentos",
-  targetKey: "id_Fechamentos",
+// Define associations between models
+SB_Acatamentos.belongsTo(SB_SolicitacaoBase, {
+  foreignKey: "SB_SolicitacaoBase_id_SolicitacaoBase",
+  targetKey: "id_SolicitacaoBase",
 });
-SB_Acatamentos.belongsTo(SB_Fechamentos, {
-  foreignKey: "SB_Fechamentos_SB_SolicitacaoBase_id_SolicitacaoBase",
-  targetKey: "SB_SolicitacaoBase_id_SolicitacaoBase",
-});
-SB_Acatamentos.belongsTo(SB_Fechamentos, {
-  foreignKey: "SB_Fechamentos_SB_SolicitacaoBase_SB_Enderecos_id_Endereco",
-  targetKey: "SB_SolicitacaoBase_SB_Enderecos_id_Endereco",
+SB_Acatamentos.belongsTo(SB_SolicitacaoBase, {
+  foreignKey: "SB_SolicitacaoBase_SB_Enderecos_id_Endereco",
+  targetKey: "SB_Enderecos_id_Endereco",
 });
 
 module.exports = SB_Acatamentos;

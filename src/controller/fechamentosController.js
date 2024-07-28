@@ -2,8 +2,8 @@ const fechamentosServices = require("../service/servicesFechamentos");
 
 const getFechamentos = async (req, res) => {
   try {
-    const fechamnetos = await fechamentosServices.getFechamentos();
-    res.status(200).send(fechamnetos);
+    const fechamentos = await fechamentosServices.getFechamentos();
+    res.status(200).send(fechamentos);
   } catch (error) {
     res.status(500).send({ message: "Erro ao buscar fechamentos", error });
   }

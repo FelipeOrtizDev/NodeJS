@@ -24,6 +24,7 @@ SB_Fechamentos.init(
     SB_QTDELigacoes: DataTypes.INTEGER,
     SB_HSNObservacao: DataTypes.STRING,
     SB_HSNMotivo: DataTypes.STRING,
+    SB_ManobraWFM: DataTypes.STRING,
     SB_SolicitacaoBase_id_SolicitacaoBase: {
       type: DataTypes.INTEGER,
       references: {

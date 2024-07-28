@@ -28,6 +28,7 @@ SB_Fechamentos.init(
     SB_Previsão: DataTypes.TIME,
     SB_HFSObservacaoFechamento: DataTypes.STRING,
     SB_Executante: DataTypes.STRING,
+    SB_OFechado: DataTypes.STRING,
     SB_SolicitacaoBase_id_SolicitacaoBase: {
       type: DataTypes.INTEGER,
       references: {

@@ -15,7 +15,7 @@ SB_Acatamentos.init(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    SB_PrvisãoAcatamento: {
+    SB_PrvisaoAcatamento: {
       type: DataTypes.TIME,
       allowNull: false,
     },

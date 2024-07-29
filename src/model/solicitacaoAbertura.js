@@ -46,7 +46,7 @@ SB_SolicitacaoAbertura.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    SB_ServiçoAceito: {
+    SB_ServicoAceito: {
       type: DataTypes.TINYINT,
       allowNull: true,
     },

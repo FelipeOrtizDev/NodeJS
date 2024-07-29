@@ -25,7 +25,7 @@ SB_Fechamentos.init(
     SB_HSNObservacao: DataTypes.STRING,
     SB_HSNMotivo: DataTypes.STRING,
     SB_ManobraWFM: DataTypes.STRING,
-    SB_Previsão: DataTypes.TIME,
+    SB_Previsao: DataTypes.TIME,
     SB_HFSObservacaoFechamento: DataTypes.STRING,
     SB_Executante: DataTypes.STRING,
     SB_OFechado: DataTypes.STRING,

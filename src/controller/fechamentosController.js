@@ -9,13 +9,24 @@ const getFechamentos = async (req, res) => {
   }
 };
 
-const createFechamentos = async (req, res) => {
+const createFechamentos = async (request, reply) => {
+  const { solicitacaoBaseId } = request.params;
+  const fechamentoData = {
+    ...request.body,
+    SB_SolicitacaoBase_id_SolicitacaoBase: solicitacaoBaseId,
+  };
   try {
-    const fechamentos = await fechamentosServices.createFechamentos(req.body);
-    res.status(201).send(fechamentos);
+    const novoFechamentos = await fechamentosServices.createFechamentos(
+      fechamentoData
+    );
+    reply.status(201).send(novoFechamentos);
   } catch (error) {
-    console.error(error);
-    res.status(500).send({ message: "Erro ao criar Fechamento", error });
+    console.error("Erro ao criar Fechamento:", error.message, error.stack);
+    reply.status(500).send({
+      message: "Erro ao criar Fechamento",
+      error: error.message,
+      stack: error.stack,
+    });
   }
 };
 

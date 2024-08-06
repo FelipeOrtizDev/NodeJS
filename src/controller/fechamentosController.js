@@ -11,10 +11,21 @@ const getFechamentos = async (req, res) => {
 
 const createFechamentos = async (request, reply) => {
   const { solicitacaoBaseId } = request.params;
-  const fechamentoData = {
+  console.log("Parametro solicitacaoBaseId:", solicitacaoBaseId);
+  /*  const fechamentoData = {
     ...request.body,
     SB_SolicitacaoBase_id_SolicitacaoBase: solicitacaoBaseId,
-  };
+  }; */
+  if (!solicitacaoBaseId) {
+    return reply.status(400).send({
+      message: "solicitacaoBaseId is required",
+    });
+  }
+
+  const fechamentoData = request.body;
+  fechamentoData.SB_SolicitacaoBase_id_SolicitacaoBase = solicitacaoBaseId;
+  console.log("Dados do fechamento recebidos:", fechamentoData);
+
   try {
     const novoFechamentos = await fechamentosServices.createFechamentos(
       fechamentoData

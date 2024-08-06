@@ -32,7 +32,7 @@ class ServicesFechamentos {
     }
   }; */
 
-  createFechamentos = async (fechamentosData) => {
+  /* createFechamentos = async (fechamentosData) => {
     const solicitacaoBase = await SB_SolicitacaoBase.findByPk(
       fechamentosData.SB_SolicitacaoBase.id_SolicitacaoBase
     );
@@ -40,6 +40,32 @@ class ServicesFechamentos {
       throw new Error("SolicitacaoBase not found");
     }
     return await SB_Fechamentos.create(fechamentosData);
+  }; */
+
+  createFechamentos = async (fechamentoData) => {
+    try {
+      console.log(
+        "Dados recebidos para criação do Fechamento no serviço:",
+        fechamentoData
+      );
+      if (!fechamentoData.SB_SolicitacaoBase_id_SolicitacaoBase) {
+        throw new Error("SB_SolicitacaoBase_id_SolicitacaoBase is required");
+      }
+      const solicitacaoBase = await SB_SolicitacaoBase.findByPk(
+        fechamentoData.SB_SolicitacaoBase_id_SolicitacaoBase
+      );
+      if (!solicitacaoBase) {
+        throw new Error("SolicitacaoBase not found");
+      }
+      return await SB_Fechamentos.create(fechamentoData);
+    } catch (error) {
+      console.error(
+        "Erro no serviço de criação de Fechamento:",
+        error.message,
+        error.stack
+      );
+      throw error;
+    }
   };
 
   updateFechamentos = async (id, data) => {

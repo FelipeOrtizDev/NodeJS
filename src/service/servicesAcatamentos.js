@@ -13,24 +13,32 @@ class ServiceAcatamento {
     }
   };
 
-  createAcatamento = async (data) => {
+  createAcatamento = async (acatamentoData) => {
     try {
-      const solicitacaoBaseExist = await SB_SolicitacaoBase.findOne({
-        where: {
-          id_SolicitacaoBase: data.SB_SolicitacaoBase_id_SolicitacaoBase,
-          SB_Enderecos_id_Endereco:
-            data.SB_SolicitacaoBase_SB_Enderecos_id_Endereco,
-        },
-      });
+      console.log(
+        "Dados recebidos para criação do Acatamento no serviço:",
+        acatamentoData
+      );
 
-      if (!solicitacaoBaseExist) {
-        throw new Error("SolicitacaoBase referenciada não existe");
+      if (!acatamentoData.SB_SolicitacaoBase_id_SolicitacaoBase) {
+        throw new Error("SB_SolicitacaoBase_id_SolicitacaoBase is required");
       }
 
-      const acatamento = await SB_Acatamentos.create(data);
-      return acatamento;
+      const solicitacaoBase = await SB_SolicitacaoBase.findByPk(
+        acatamentoData.SB_SolicitacaoBase_id_SolicitacaoBase
+      );
+
+      if (!solicitacaoBase) {
+        throw new Error("SolicitacaoBase not found");
+      }
+      return await SB_Acatamentos.create(acatamentoData);
     } catch (error) {
-      throw new Error("Erro ao criar acatamento: " + error.message);
+      console.error(
+        "Erro no serviço de criação de Acatamento:",
+        error.message,
+        error.stack
+      );
+      throw error;
     }
   };
 

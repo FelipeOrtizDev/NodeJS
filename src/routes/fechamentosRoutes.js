@@ -1,7 +1,10 @@
 const fechamentoController = require("../controller/fechamentosController");
 
 const fechamentosRoutes = async (server) => {
-  server.get("/fechamentos/:solicitaoId", fechamentoController.getFechamentos);
+  server.get(
+    "/fechamentos/:id_SolicitacaoBase",
+    fechamentoController.getFechamentosById
+  );
   server.post(
     "/fechamentos/:solicitacaoBaseId",
     fechamentoController.createFechamentos

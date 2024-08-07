@@ -9,13 +9,27 @@ const getFechamentos = async (req, res) => {
   }
 };
 
+const getFechamentosById = async (req, reply) => {
+  const { id_SolicitacaoBase } = req.params;
+  try {
+    const fechamento = await fechamentosServices.getFechamentosById(
+      id_SolicitacaoBase
+    );
+    if (!fechamento) {
+      return reply.status(404).send({ message: "Fechamento não encontrado" });
+    }
+    return reply.status(200).send(fechamento);
+  } catch (error) {
+    console.error("Erro ao Buscar fechamento:", error);
+    return reply
+      .status(500)
+      .send({ message: "Erro ao buscar fechamento", error });
+  }
+};
+
 const createFechamentos = async (request, reply) => {
   const { solicitacaoBaseId } = request.params;
-  console.log("Parametro solicitacaoBaseId:", solicitacaoBaseId);
-  /*  const fechamentoData = {
-    ...request.body,
-    SB_SolicitacaoBase_id_SolicitacaoBase: solicitacaoBaseId,
-  }; */
+
   if (!solicitacaoBaseId) {
     return reply.status(400).send({
       message: "solicitacaoBaseId is required",
@@ -66,6 +80,7 @@ const deleteFechamentos = async (req, res) => {
 
 module.exports = {
   getFechamentos,
+  getFechamentosById,
   createFechamentos,
   updateFehchamentos,
   deleteFechamentos,

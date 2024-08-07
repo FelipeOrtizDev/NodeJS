@@ -9,12 +9,28 @@ const getAllAcatamento = async (req, res) => {
   }
 };
 
-const createAcatamento = async (req, res) => {
+const createAcatamento = async (request, reply) => {
+  const { solicitacaoBaseId } = request.params;
+
+  if (!solicitacaoBaseId) {
+    return reply.status(400).send({
+      message: "solicitacaoBaseId is required",
+    });
+  }
+  const acatamentoData = request.body;
+  acatamentoData.SB_SolicitacaoBase_id_SolicitacaoBase = solicitacaoBaseId;
+  console.log("Dados do fechamento recebidos:", acatamentoData);
   try {
-    const acatamento = await serviceAcatamento.createAcatamento(req.body);
-    res.status(201).send(acatamento);
+    const novoAcatamento = await serviceAcatamento.createAcatamento(
+      acatamentoData
+    );
+    res.status(201).send(novoAcatamento);
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    res.status(500).send({
+      message: "Erro ao criar Acatamento",
+      error: error.message,
+      stack: error.stack,
+    });
   }
 };
 

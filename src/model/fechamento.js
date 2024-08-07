@@ -13,8 +13,6 @@ SB_Fechamentos.init(
     },
     SB_DataFechamento: DataTypes.DATE,
     SB_HoraFechamento: DataTypes.TIME,
-    SB_Status: DataTypes.STRING,
-    SB_Prioridade: DataTypes.STRING,
     SB_ServicoAceito: DataTypes.TINYINT,
     SB_HouveFechamento: DataTypes.TINYINT,
     SB_Rede: DataTypes.STRING,

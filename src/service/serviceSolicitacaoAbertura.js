@@ -1,4 +1,5 @@
 const SB_SolicitacaoAbertura = require("../model/solicitacaoAbertura");
+const SB_SolicitacaoBase = require("../model/solicitacaoBase");
 
 class SolicitacaoAberturaService {
   async getAllSolicitacoesAbertura() {
@@ -12,12 +13,31 @@ class SolicitacaoAberturaService {
     }
   }
 
-  async createSolicitacaoAbertura(data) {
+  async createSolicitacaoAbertura(solicitacaoAberturaData) {
     try {
-      const solicitacaoAbertura = await SB_SolicitacaoAbertura.create(data);
-      return solicitacaoAbertura;
+      console.log(
+        "Dados recebidos para criação de Solicitacao Abertura",
+        solicitacaoAberturaData
+      );
+      if (!solicitacaoAberturaData.SB_SolicitacaoBase_id_SolicitacaoBase) {
+        throw new Error("SB_SolicitacaoBase_id_SolicitacaoBase is required");
+      }
+      const solicitacaoBase = await SB_SolicitacaoBase.findByPk(
+        solicitacaoAberturaData.SB_SolicitacaoBase_id_SolicitacaoBase
+      );
+
+      if (!solicitacaoBase) {
+        throw new Error("SolicitacaoBase not found");
+      }
+
+      return await SB_SolicitacaoAbertura.create(solicitacaoAberturaData);
     } catch (error) {
-      throw new Error("Error creating Solicitacao Abertura: " + error.message);
+      console.error(
+        "Erro no serviço de criação de Solicitacao Abertura:",
+        error.message,
+        error.stack
+      );
+      throw error;
     }
   }
 

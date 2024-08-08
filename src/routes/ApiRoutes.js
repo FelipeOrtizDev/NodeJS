@@ -4,6 +4,8 @@ const fechamentosRoutes = require("./fechamentosRoutes");
 const acatamentosRoutes = require("./acatamentoRoutes");
 const usuarioRoutes = require("./usuarioRoutes"); // Adicionar rotas de usuário
 const solicitacaoAberturaRoutes = require("./solicitacaoAberturaRoutes");
+const acatamentosAberturaRoutes = require("./acatamentosAberturasRoutes");
+const tipoServicoRoutes = require("./tipoServicoRoutes");
 
 // Registro das rotas no servidor
 const registerRoutes = async (server) => {
@@ -13,6 +15,8 @@ const registerRoutes = async (server) => {
   server.register(fechamentosRoutes);
   server.register(usuarioRoutes);
   server.register(solicitacaoAberturaRoutes);
+  server.register(acatamentosAberturaRoutes);
+  server.register(tipoServicoRoutes);
 };
 
 module.exports = registerRoutes;

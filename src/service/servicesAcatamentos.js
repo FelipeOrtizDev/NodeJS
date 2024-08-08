@@ -2,15 +2,10 @@ const SB_Acatamentos = require("../model/acatamento");
 const SB_SolicitacaoBase = require("../model/solicitacaoBase");
 
 class ServiceAcatamento {
-  getAllAcatamento = async () => {
-    try {
-      const acatamentos = await SB_Acatamentos.findAll({
-        include: [SB_SolicitacaoBase],
-      });
-      return acatamentos;
-    } catch (error) {
-      throw new Error("Erro ao buscar acatamentos: " + error.message);
-    }
+  findBySolicitacaoBaseId = async (solicitacaoBaseId) => {
+    return await SB_Acatamentos.findOne({
+      where: { SB_SolicitacaoBase_id_SolicitacaoBase: solicitacaoBaseId },
+    });
   };
 
   createAcatamento = async (acatamentoData) => {

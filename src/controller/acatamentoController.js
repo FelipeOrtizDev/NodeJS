@@ -1,3 +1,4 @@
+const SB_SolicitacaoBase = require("../model/solicitacaoBase");
 const serviceAcatamento = require("../service/servicesAcatamentos");
 
 const getAllAcatamento = async (req, res) => {
@@ -5,7 +6,37 @@ const getAllAcatamento = async (req, res) => {
     const acatamento = await serviceAcatamento.getAllAcatamento();
     res.status(200).send(acatamento);
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    res
+      .status(500)
+      .send({
+        message: "Erro buscar Acatamento",
+        error: error.message,
+        stack: error.stack,
+      });
+  }
+};
+
+const getAcatamentoBySolicitacaoBaseId = async (request, reply) => {
+  const { solicitacaoBaseId } = request.params;
+
+  if (!solicitacaoBaseId) {
+    return reply.status(400).send({ message: "solicitacaoBaseId is required" });
+  }
+
+  try {
+    const acatamento = await serviceAcatamento.findBySolicitacaoBaseId(
+      solicitacaoBaseId
+    );
+    if (!acatamento) {
+      return reply.status(404).send({ message: "Acatamento not found" });
+    }
+    return reply.status(200).send(acatamento);
+  } catch (error) {
+    return reply.status(500).send({
+      message: "Erro ao buscar Acatamento",
+      error: error.message,
+      stack: error.stack,
+    });
   }
 };
 
@@ -24,9 +55,14 @@ const createAcatamento = async (request, reply) => {
     const novoAcatamento = await serviceAcatamento.createAcatamento(
       acatamentoData
     );
-    res.status(201).send(novoAcatamento);
+
+    await SB_SolicitacaoBase.update(
+      { SB_Status: "Acatado" },
+      { where: { id_SolicitacaoBase: solicitacaoBaseId } }
+    );
+    reply.status(201).send(novoAcatamento);
   } catch (error) {
-    res.status(500).send({
+    reply.status(500).send({
       message: "Erro ao criar Acatamento",
       error: error.message,
       stack: error.stack,
@@ -59,4 +95,5 @@ module.exports = {
   createAcatamento,
   updateAcatamento,
   deleteAcatamento,
+  getAcatamentoBySolicitacaoBaseId,
 };

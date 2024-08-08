@@ -11,12 +11,39 @@ const getAllSolicitacoesAbertura = async (req, res) => {
 };
 
 const createSolicitacaoAbertura = async (req, res) => {
+  const { solicitacaoBaseId } = req.params;
+
+  if (!solicitacaoBaseId) {
+    return res.status(400).send({
+      message: "solicitacaoBaseId is required",
+    });
+  }
+
+  const solicitacaoAberturaData = req.body;
+  solicitacaoAberturaData.SB_SolicitacaoBase_id_SolicitacaoBase =
+    solicitacaoBaseId;
+  console.log(
+    "Dados do solicitação de Abertura recebidos:",
+    solicitacaoAberturaData
+  );
+
   try {
-    const solicitacaoAbertura =
-      await SolicitacaoAberturaService.createSolicitacaoAbertura(req.body);
-    res.status(201).send(solicitacaoAbertura);
+    const novaSolicitacaoAbertura =
+      await SolicitacaoAberturaService.createSolicitacaoAbertura(
+        solicitacaoAberturaData
+      );
+    res.status(201).send(novaSolicitacaoAbertura);
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    console.error(
+      "Erro ao criar Solicitacao Abertura:",
+      error.message,
+      error.stack
+    );
+    res.status(500).send({
+      message: "Erro ao criar Solicitacao Abertura",
+      error: error.message,
+      stack: error.stack,
+    });
   }
 };
 

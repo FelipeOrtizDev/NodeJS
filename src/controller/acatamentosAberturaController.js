@@ -11,12 +11,36 @@ const getAllAcatamentosAbertura = async (req, res) => {
 };
 
 const createAcatamentosAbertura = async (req, res) => {
+  const { solicitacaoAberturaId } = req.params;
+
+  if (!solicitacaoAberturaId) {
+    return res.status(400).send({
+      message: "solicitacaoAberturaId is required",
+    });
+  }
+
+  const acatamentoAberturaData = req.body;
+  acatamentoAberturaData.SB_SolicitacaoAbertura_id_SolicitacaoAbertura =
+    solicitacaoAberturaId;
+  console.log(" Dados fechamento recebidos: ", acatamentoAberturaData);
+
   try {
-    const acatamentoAbertura =
-      await AcatamentosAberturaService.createAcatamentosAbertura(req.body);
-    res.status(201).send(acatamentoAbertura);
+    const novoAcatamentoAbertura =
+      await AcatamentosAberturaService.createAcatamentosAbertura(
+        acatamentoAberturaData
+      );
+    res.status(201).send(novoAcatamentoAbertura);
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    console.error(
+      "Erro ao criar AcatamentoAbertura:",
+      error.message,
+      error.stack
+    );
+    res.status(500).send({
+      message: "Erro ao criar AcatamentoAbertura",
+      error: error.message,
+      stack: error.stack,
+    });
   }
 };
 

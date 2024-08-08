@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db/database");
+const SB_SolicitacaoBase = require("./solicitacaoBase");
 
 class SB_SolicitacaoAbertura extends Model {}
 
@@ -10,45 +11,26 @@ SB_SolicitacaoAbertura.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    SB_DataAbertura: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
+    SB_DataAbertura: DataTypes.DATE,
+    SB_HoraAbertura: DataTypes.TIME,
+    SB_HNMotivo: DataTypes.STRING,
+    SB_HNObservacoes: DataTypes.STRING,
+    SB_HSData: DataTypes.DATE,
+    SB_Solicitante: DataTypes.STRING,
+    SB_ServicoAceito: DataTypes.TINYINT,
     SB_SolicitacaoBase_id_SolicitacaoBase: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      references: {
+        model: SB_SolicitacaoBase,
+        key: "id_SolicitacaoBase",
+      },
     },
     SB_SolicitacaoBase_SB_Enderecos_id_Endereco: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    SB_HAbertura: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-    },
-    SB_HNMotivo: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    SB_HNObservações: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    SB_HSData: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
-    SB_HoraAbertura: {
-      type: DataTypes.TIME,
-      allowNull: true,
-    },
-    SB_Solicitante: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    SB_ServicoAceito: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
+      references: {
+        model: SB_SolicitacaoBase,
+        key: "SB_Enderecos_id_Endereco",
+      },
     },
   },
   {
@@ -58,5 +40,10 @@ SB_SolicitacaoAbertura.init(
     timestamps: false,
   }
 );
+
+SB_SolicitacaoAbertura.belongsTo(SB_SolicitacaoBase, {
+  foreignKey: "SB_SolicitacaoBase_id_SolicitacaoBase",
+  targetKey: "id_SolicitacaoBase",
+});
 
 module.exports = SB_SolicitacaoAbertura;

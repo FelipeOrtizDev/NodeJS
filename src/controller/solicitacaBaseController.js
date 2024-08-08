@@ -9,7 +9,7 @@ const getAllSolicitacao = async (req, res) => {
   }
 };
 
-const createSolictacao = async (req, res) => {
+/* const createSolictacao = async (req, res) => {
   try {
     const solicitacao = await solicitacaoBaseServices.createSolictacao(
       req.body
@@ -19,7 +19,26 @@ const createSolictacao = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+ */
 
+const createSolictacao = async (req, res) => {
+  try {
+    const { SB_TipoServico, ...data } = req.body;
+    const tipoServico = SB_TipoServico || "Outros";
+    const solicitacao = await solicitacaoBaseServices.createSolictacao({
+      ...data,
+      SB_TipoServico: tipoServico,
+    });
+    res.status(201).send(solicitacao);
+  } catch (error) {
+    console.error("Erro ao criar SolicitacaoBase:", error.message, error.stack);
+    res.status(500).send({
+      message: "Erro ao criar SolicitacaoBase",
+      error: error.message,
+      stack: error.stack,
+    });
+  }
+};
 const updateSolicitacao = async (req, res) => {
   const { id } = req.params;
   try {

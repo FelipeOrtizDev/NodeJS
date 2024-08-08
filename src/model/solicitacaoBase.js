@@ -14,7 +14,11 @@ SB_SolicitacaoBase.init(
     SB_DataSolicitacao: DataTypes.DATE,
     SB_HoraSolicitacao: DataTypes.TIME,
     SB_NumeroOS: DataTypes.STRING,
-    SB_TipoServico: DataTypes.STRING,
+    SB_TipoServico: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      defaultValue: "Outros",
+    },
     SB_Observacoes: DataTypes.STRING,
     SB_Microzona: DataTypes.TINYINT,
     SB_Solicitante: DataTypes.STRING,

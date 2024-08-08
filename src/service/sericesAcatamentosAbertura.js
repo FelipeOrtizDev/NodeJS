@@ -1,4 +1,5 @@
 const SB_AcatamentosAbertura = require("../model/acatamentosAbertura");
+const SB_SolicitacaoAbertura = require("../model/solicitacaoAbertura");
 
 class AcatamentosAberturaService {
   async getAllAcatamentosAbertura() {
@@ -12,12 +13,34 @@ class AcatamentosAberturaService {
     }
   }
 
-  async createAcatamentosAbertura(data) {
+  async createAcatamentosAbertura(acatamentoAberturaData) {
     try {
-      const acatamentoAbertura = await SB_AcatamentosAbertura.create(data);
-      return acatamentoAbertura;
+      console.log(
+        "Dados recibidos para criação do Acatamento Abertura no serviço:",
+        acatamentoAberturaData
+      );
+      if (
+        !acatamentoAberturaData.SB_SolicitacaoAbertura_id_SolicitacaoAbertura
+      ) {
+        throw new Error(
+          "SB_SolicitacaoAbertura_id_SolicitacaoAbertura is required"
+        );
+      }
+      const solicitacaoAbertura = await SB_SolicitacaoAbertura.findByPk(
+        acatamentoAberturaData.SB_SolicitacaoAbertura_id_SolicitacaoAbertura
+      );
+      if (!solicitacaoAbertura) {
+        throw new Error("SolicitacaoAbertura not found");
+      }
+
+      return await SB_AcatamentosAbertura.create(acatamentoAberturaData);
     } catch (error) {
-      throw new Error("Error creating Acatamentos Abertura: " + error.message);
+      console.error(
+        "Erro no serviço de criação de AcatamentoAbertura:",
+        error.message,
+        error.stack
+      );
+      throw error;
     }
   }
 

@@ -3,8 +3,8 @@ const acatamentosController = require("../controller/acatamentoController");
 // Definição das rotas para acatamentos
 const acatamentosRoutes = async (server) => {
   server.get(
-    "/acatamentos/:solicitacaoBaseId",
-    acatamentosController.getAllAcatamento
+    "/acatamento/:solicitacaoBaseId",
+    acatamentosController.getAcatamentoBySolicitacaoBaseId
   );
   server.post(
     "/acatamentos/:solicitacaoBaseId",

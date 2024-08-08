@@ -15,6 +15,7 @@
     "fastify": "^4.28.1",
     "fastify-cors": "^6.1.0",
     "mysql2": "^3.10.3",
+    "nodejs": "file:",
     "sequelize": "^6.37.3"
   }
 }

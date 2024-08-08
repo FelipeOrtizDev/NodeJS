@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db/database");
+const { SB_SolicitacaoAbertura } = require("./solicitacaoAbertura");
 
 class SB_AcatamentosAbertura extends Model {}
 
@@ -14,7 +15,7 @@ SB_AcatamentosAbertura.init(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    SB_PrvisaoAcatamentoAbertura: {
+    SB_PrevisaoAcatamentoAbertura: {
       type: DataTypes.TIME,
       allowNull: false,
     },
@@ -24,7 +25,10 @@ SB_AcatamentosAbertura.init(
     },
     SB_SolicitacaoAbertura_id_SolicitacaoAbertura: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      references: {
+        model: SB_SolicitacaoAbertura,
+        key: "id_SolicitacaoAbertura",
+      },
     },
     SB_ObservacaoAcatamentoAbertura: {
       type: DataTypes.STRING,

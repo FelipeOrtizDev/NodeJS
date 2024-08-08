@@ -27,7 +27,12 @@ class ServicesSolicitacaoBase {
       const solicitacoes = await SB_SolicitacaoBase.create(data);
       return solicitacoes;
     } catch (error) {
-      throw new Error("Erro ao criar solicitação base: " + error.message);
+      console.error(
+        "Erro no serviço de criação de Solicitacao Base:",
+        error.message,
+        error.stack
+      );
+      throw error;
     }
   };
 

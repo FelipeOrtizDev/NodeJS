@@ -13,15 +13,15 @@ SB_Acatamentos.init(
     },
     SB_DataAcatamento: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     SB_PrevisaoAcatamento: {
       type: DataTypes.TIME,
-      allowNull: false,
+      allowNull: true,
     },
     SB_EquipeResponsavel: {
       type: DataTypes.STRING(75),
-      allowNull: false,
+      allowNull: true,
     },
     SB_ObservacaoAcatamento: {
       type: DataTypes.STRING(250),

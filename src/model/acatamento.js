@@ -35,31 +35,30 @@ SB_Acatamentos.init(
         key: "id_SolicitacaoBase",
       },
     },
-    SB_SolicitacaoBase_SB_Enderecos_id_Endereco: {
+    SB_Endereco_id_Endereco: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: SB_SolicitacaoBase,
-        key: "SB_Enderecos_id_Endereco",
+        key: "SB_Endereco_id_Endereco",
       },
     },
   },
   {
     sequelize,
     modelName: "SB_Acatamentos",
-    tableName: "SB_Acatamentos",
+    tableName: "sb_acatamentos",
     timestamps: false,
   }
 );
 
-// Define associations between models
 SB_Acatamentos.belongsTo(SB_SolicitacaoBase, {
   foreignKey: "SB_SolicitacaoBase_id_SolicitacaoBase",
   targetKey: "id_SolicitacaoBase",
 });
 SB_Acatamentos.belongsTo(SB_SolicitacaoBase, {
-  foreignKey: "SB_SolicitacaoBase_SB_Enderecos_id_Endereco",
-  targetKey: "SB_Enderecos_id_Endereco",
+  foreignKey: "SB_Endereco_id_Endereco",
+  targetKey: "SB_Endereco_id_Endereco",
 });
 
 module.exports = SB_Acatamentos;

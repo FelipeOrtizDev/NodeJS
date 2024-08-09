@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db/database");
-const { SB_SolicitacaoAbertura } = require("./solicitacaoAbertura");
+const SB_SolicitacaoAbertura = require("./solicitacaoAbertura");
 
 class SB_AcatamentosAbertura extends Model {}
 
@@ -38,7 +38,7 @@ SB_AcatamentosAbertura.init(
   {
     sequelize,
     modelName: "SB_AcatamentosAbertura",
-    tableName: "SB_AcatamentosAbertura",
+    tableName: "sb_acatamentosabertura",
     timestamps: false,
   }
 );

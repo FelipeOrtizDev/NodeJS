@@ -1,4 +1,3 @@
-// src/models/setorAbastecimento.js
 const { DataTypes, Model } = require("sequelize");
 const { sequelize } = require("../db/database");
 const Municipio = require("./municipio");
@@ -28,7 +27,7 @@ SetorAbastecimento.init(
   {
     sequelize,
     modelName: "SetorAbastecimento",
-    tableName: "SB_SetorAbastecimento",
+    tableName: "sb_setorabastecimento",
     timestamps: false,
   }
 );

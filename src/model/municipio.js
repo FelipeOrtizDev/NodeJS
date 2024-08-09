@@ -1,4 +1,3 @@
-// src/models/municipio.js
 const { DataTypes, Model } = require("sequelize");
 const { sequelize } = require("../db/database");
 const Polo = require("./polo");
@@ -28,7 +27,7 @@ Municipio.init(
   {
     sequelize,
     modelName: "Municipio",
-    tableName: "SB_Municipio",
+    tableName: "sb_municipio",
     timestamps: false,
   }
 );

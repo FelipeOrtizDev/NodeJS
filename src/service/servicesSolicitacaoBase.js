@@ -17,7 +17,7 @@ class ServicesSolicitacaoBase {
     try {
       const enderecoExists = await SB_Endereco.findOne({
         where: {
-          id_Endereco: data.SB_Enderecos_id_Endereco,
+          id_Endereco: data.SB_Endereco_id_Endereco,
         },
       });
 

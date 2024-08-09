@@ -25,18 +25,18 @@ SB_SolicitacaoAbertura.init(
         key: "id_SolicitacaoBase",
       },
     },
-    SB_SolicitacaoBase_SB_Enderecos_id_Endereco: {
+    SB_Endereco_id_Endereco: {
       type: DataTypes.INTEGER,
       references: {
         model: SB_SolicitacaoBase,
-        key: "SB_Enderecos_id_Endereco",
+        key: "SB_Endereco_id_Endereco",
       },
     },
   },
   {
     sequelize,
     modelName: "SB_SolicitacaoAbertura",
-    tableName: "SB_SolicitacaoAbertura",
+    tableName: "sb_solicitacaoabertura",
     timestamps: false,
   }
 );

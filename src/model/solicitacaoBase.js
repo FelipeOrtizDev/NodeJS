@@ -27,7 +27,7 @@ SB_SolicitacaoBase.init(
     SB_Motivo: DataTypes.TINYINT,
     SB_Prioridade: DataTypes.STRING,
     SB_Status: DataTypes.STRING,
-    SB_Enderecos_id_Endereco: {
+    SB_Endereco_id_Endereco: {
       type: DataTypes.INTEGER,
       references: {
         model: SB_Endereco,
@@ -38,13 +38,13 @@ SB_SolicitacaoBase.init(
   {
     sequelize,
     modelName: "SB_SolicitacaoBase",
-    tableName: "SB_SolicitacaoBase",
+    tableName: "sb_solicitacaobase",
     timestamps: false,
   }
 );
 
 SB_SolicitacaoBase.belongsTo(SB_Endereco, {
-  foreignKey: "SB_Enderecos_id_Endereco",
+  foreignKey: "SB_Endereco_id_Endereco",
 });
 
 module.exports = SB_SolicitacaoBase;

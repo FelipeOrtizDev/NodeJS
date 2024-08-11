@@ -28,7 +28,7 @@ class ServicesFechamentos {
         throw new Error("SB_SolicitacaoBase_id_SolicitacaoBase is required");
       }
       const solicitacaoBase = await SB_SolicitacaoBase.findByPk(
-        fechamentoData.SB_SolicitacaoBase_id_SolicitacaoBase
+        fechamentoData.SB_SolicitacaoBase_id_SolicitacaoBase,
       );
       if (!solicitacaoBase) {
         throw new Error("SolicitacaoBase not found");

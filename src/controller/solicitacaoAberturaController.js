@@ -25,7 +25,7 @@ const getSolicitacaoAberturaById = async (req, res) => {
     return res.status(200).send(solicitacaoAbertura);
   } catch (error) {
     console.error("Erro ao Buscar Solicitacao de abertura:", error);
-    return reply
+    return res
       .status(500)
       .send({ message: "Erro ao buscar Solicitacao de abertura", error });
   }

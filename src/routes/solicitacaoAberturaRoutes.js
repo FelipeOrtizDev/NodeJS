@@ -1,12 +1,16 @@
 const {
   getAllSolicitacoesAbertura,
+  getSolicitacaoAberturaById,
   createSolicitacaoAbertura,
   updateSolicitacaoAbertura,
   deleteSolicitacaoAbertura,
 } = require("../controller/solicitacaoAberturaController");
 
 function solicitacaoAberturaRoutes(server, options, done) {
-  server.get("/solicitacoesAbertura", getAllSolicitacoesAbertura);
+  server.get(
+    "/solicitacoesAbertura/:solicitacaoBaseId",
+    getSolicitacaoAberturaById
+  );
   server.post(
     "/solicitacoesAbertura/:solicitacaoBaseId",
     createSolicitacaoAbertura

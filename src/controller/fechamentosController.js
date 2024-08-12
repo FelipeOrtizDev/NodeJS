@@ -1,4 +1,5 @@
 const fechamentosServices = require("../service/servicesFechamentos");
+const SB_SolicitacaoBase = require("../model/solicitacaoBase");
 
 const getFechamentos = async (req, res) => {
   try {
@@ -43,6 +44,11 @@ const createFechamentos = async (request, reply) => {
   try {
     const novoFechamentos = await fechamentosServices.createFechamentos(
       fechamentoData
+    );
+
+    await SB_SolicitacaoBase.update(
+      { SB_Status: "Fechado" },
+      { where: { id_SolicitacaoBase: solicitacaoBaseId } }
     );
     reply.status(201).send(novoFechamentos);
   } catch (error) {

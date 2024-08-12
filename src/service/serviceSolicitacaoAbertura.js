@@ -13,6 +13,13 @@ class SolicitacaoAberturaService {
     }
   }
 
+  async getSolicitacaoAberturaById(solicitacaoBaseId) {
+    const solicitacaoAbertura = await SB_SolicitacaoAbertura.findByOne({
+      where: { SB_SolicitacaoBase_id_SolicitacaoBase: solicitacaoBaseId },
+    });
+    return solicitacaoAbertura;
+  }
+
   async createSolicitacaoAbertura(solicitacaoAberturaData) {
     try {
       console.log(

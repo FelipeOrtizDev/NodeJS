@@ -10,6 +10,27 @@ const getAllSolicitacoesAbertura = async (req, res) => {
   }
 };
 
+const getSolicitacaoAberturaById = async (req, res) => {
+  const { solicitacaoBaseId } = req.params;
+  try {
+    const solicitacaoAbertura =
+      await SolicitacaoAberturaService.getSolicitacaoAberturaById(
+        solicitacaoBaseId
+      );
+    if (!solicitacaoAbertura) {
+      res
+        .status(404)
+        .send({ message: "Solicitacao de abertura nao encontrada" });
+    }
+    return res.status(200).send(solicitacaoAbertura);
+  } catch (error) {
+    console.error("Erro ao Buscar Solicitacao de abertura:", error);
+    return reply
+      .status(500)
+      .send({ message: "Erro ao buscar Solicitacao de abertura", error });
+  }
+};
+
 const createSolicitacaoAbertura = async (req, res) => {
   const { solicitacaoBaseId } = req.params;
 
@@ -72,6 +93,7 @@ const deleteSolicitacaoAbertura = async (req, res) => {
 
 module.exports = {
   getAllSolicitacoesAbertura,
+  getSolicitacaoAberturaById,
   createSolicitacaoAbertura,
   updateSolicitacaoAbertura,
   deleteSolicitacaoAbertura,

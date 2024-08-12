@@ -55,7 +55,7 @@ const createSolicitacaoAbertura = async (req, res) => {
       );
 
     await SB_SolicitacaoBase.update(
-      { SB_Status: "Acatado" },
+      { SB_Status: "Aberto" },
       { where: { id_SolicitacaoBase: solicitacaoBaseId } }
     );
 

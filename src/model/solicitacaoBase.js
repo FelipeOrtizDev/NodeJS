@@ -27,6 +27,7 @@ SB_SolicitacaoBase.init(
     SB_Motivo: DataTypes.TINYINT,
     SB_Prioridade: DataTypes.STRING,
     SB_Status: DataTypes.STRING,
+    SB_Timer: DataTypes.TIME,
     SB_Endereco_id_Endereco: {
       type: DataTypes.INTEGER,
       references: {

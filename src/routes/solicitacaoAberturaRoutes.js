@@ -12,7 +12,7 @@ function solicitacaoAberturaRoutes(server, options, done) {
     getSolicitacaoAberturaById
   );
   server.post(
-    "/solicitacoesAbertura/:solicitacaoBaseId",
+    "/solicitacoeAbertura/:solicitacaoBaseId",
     createSolicitacaoAbertura
   );
   server.put("/solicitacoes-abertura/:id", updateSolicitacaoAbertura);

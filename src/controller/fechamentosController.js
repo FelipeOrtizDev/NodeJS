@@ -47,7 +47,7 @@ const createFechamentos = async (request, reply) => {
     );
 
     await SB_SolicitacaoBase.update(
-      { SB_Status: "Fechado" },
+      { SB_Status: "Fechado", SB_Timer: SB_Previsao },
       { where: { id_SolicitacaoBase: solicitacaoBaseId } }
     );
     reply.status(201).send(novoFechamentos);

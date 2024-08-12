@@ -28,6 +28,7 @@ const createSolictacao = async (req, res) => {
     const solicitacao = await solicitacaoBaseServices.createSolictacao({
       ...data,
       SB_TipoServico: tipoServico,
+      SB_Timer: "02:00",
     });
     res.status(201).send(solicitacao);
   } catch (error) {

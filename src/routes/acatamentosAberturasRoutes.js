@@ -8,11 +8,11 @@ const {
 
 function acatamentosAberturaRoutes(server, options, done) {
   server.get(
-    "/acatamentosAbertura/:solicitacaoAberturaId",
+    "/acatamentosAbertura/:solicitacaoBaseId",
     getAcatamentoAberturaById
   );
   server.post(
-    "/acatamentosAbertura/:solicitacaoAberturaId",
+    "/acatamentosAbertura/:solicitacaoBaseId",
     createAcatamentosAbertura
   );
   server.put("/acatamentos-abertura/:id", updateAcatamentosAbertura);

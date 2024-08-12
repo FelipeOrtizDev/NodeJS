@@ -11,11 +11,15 @@ const getAllAcatamentosAbertura = async (req, res) => {
 };
 
 const getAcatamentoAberturaById = async (req, res) => {
-  const { solicitacaoAberturaId } = req.params;
+  const { solicitacaoBaseId } = req.params;
+
+  if (!solicitacaoBaseId) {
+    return res.status(400).send({ message: "solicitacaoBaseId is required" });
+  }
   try {
     const acatamentoAbertura =
       await AcatamentosAberturaService.getAcatamentoAberturaById(
-        solicitacaoAberturaId
+        solicitacaoBaseId
       );
     if (!acatamentoAbertura) {
       res
@@ -31,24 +35,23 @@ const getAcatamentoAberturaById = async (req, res) => {
   }
 };
 const createAcatamentosAbertura = async (req, res) => {
-  const { solicitacaoAberturaId } = req.params;
+  const { solicitacaoBaseId } = req.params;
 
-  if (!solicitacaoAberturaId) {
-    return res.status(400).send({
-      message: "solicitacaoAberturaId is required",
-    });
+  if (!solicitacaoBaseId) {
+    return res.status(400).send({ message: "solicitacaoBaseId is required" });
   }
 
   const acatamentoAberturaData = req.body;
-  acatamentoAberturaData.SB_SolicitacaoAbertura_id_SolicitacaoAbertura =
-    solicitacaoAberturaId;
-  console.log(" Dados fechamento recebidos: ", acatamentoAberturaData);
+  acatamentoAberturaData.SB_SolicitacaoBase_id_SolicitacaoBase =
+    solicitacaoBaseId;
+  console.log(" Dados acatamentoAbertura recebidos: ", acatamentoAberturaData);
 
   try {
     const novoAcatamentoAbertura =
       await AcatamentosAberturaService.createAcatamentosAbertura(
         acatamentoAberturaData
       );
+
     res.status(201).send(novoAcatamentoAbertura);
   } catch (error) {
     console.error(

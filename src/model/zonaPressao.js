@@ -1,7 +1,9 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { DataTypes, Model } = require("sequelize");
+const { sequelize } = require("../db/database");
 
-const ZonaPressao = Sequelize.define(
-  "SB_ZonaPressao",
+class ZonaPressao extends Model {}
+
+ZonaPressao.init(
   {
     id_ZonaPressao: {
       type: DataTypes.INTEGER,
@@ -14,6 +16,8 @@ const ZonaPressao = Sequelize.define(
     },
   },
   {
+    sequelize,
+    modelName: "ZonaPressao",
     tableName: "SB_ZonaPressao",
     timestamps: false,
   }

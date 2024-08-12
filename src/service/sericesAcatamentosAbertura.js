@@ -1,5 +1,5 @@
 const SB_AcatamentosAbertura = require("../model/acatamentosAbertura");
-const SB_SolicitacaoAbertura = require("../model/solicitacaoAbertura");
+const SB_SolicitacaoBase = require("../model/solicitacaoBase");
 
 class AcatamentosAberturaService {
   async getAllAcatamentosAbertura() {
@@ -12,11 +12,9 @@ class AcatamentosAberturaService {
       );
     }
   }
-  async getAcatamentoAberturaById(solicitacaoAberturaId) {
+  async getAcatamentoAberturaById(solicitacaoBaseId) {
     const acatamentoAbertura = await SB_AcatamentosAbertura.findOne({
-      where: {
-        SB_SolicitacaoAbertura_id_SolicitacaoAbertura: solicitacaoAberturaId,
-      },
+      where: { SB_SolicitacaoBase_id_SolicitacaoBase: solicitacaoBaseId },
     });
     return acatamentoAbertura;
   }
@@ -27,18 +25,14 @@ class AcatamentosAberturaService {
         "Dados recibidos para criação do Acatamento Abertura no serviço:",
         acatamentoAberturaData
       );
-      if (
-        !acatamentoAberturaData.SB_SolicitacaoAbertura_id_SolicitacaoAbertura
-      ) {
-        throw new Error(
-          "SB_SolicitacaoAbertura_id_SolicitacaoAbertura is required"
-        );
+      if (!acatamentoAberturaData.SB_SolicitacaoBase_id_SolicitacaoBase) {
+        throw new Error("SB_SolicitacaoBase_id_SolicitacaoBase is required");
       }
-      const solicitacaoAbertura = await SB_SolicitacaoAbertura.findByPk(
-        acatamentoAberturaData.SB_SolicitacaoAbertura_id_SolicitacaoAbertura
+      const solicitacaoBase = await SB_SolicitacaoBase.findByPk(
+        acatamentoData.SB_SolicitacaoBase_id_SolicitacaoBase
       );
-      if (!solicitacaoAbertura) {
-        throw new Error("SolicitacaoAbertura not found");
+      if (!solicitacaoBase) {
+        throw new Error("SolicitacaoBase not found");
       }
 
       return await SB_AcatamentosAbertura.create(acatamentoAberturaData);

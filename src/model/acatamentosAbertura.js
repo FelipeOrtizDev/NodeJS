@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db/database");
-const SB_SolicitacaoAbertura = require("./solicitacaoAbertura");
+const SB_SolicitacaoBase = require("./solicitacaoBase");
 
 class SB_AcatamentosAbertura extends Model {}
 
@@ -23,11 +23,20 @@ SB_AcatamentosAbertura.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    SB_SolicitacaoAbertura_id_SolicitacaoAbertura: {
+    SB_SolicitacaoBase_id_SolicitacaoBase: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
-        model: SB_SolicitacaoAbertura,
-        key: "id_SolicitacaoAbertura",
+        model: SB_SolicitacaoBase,
+        key: "id_SolicitacaoBase",
+      },
+    },
+    SB_SolicitacaoBase_id_Endereco: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: SB_SolicitacaoBase,
+        key: "SB_Endereco_id_Endereco",
       },
     },
     SB_ObservacaoAcatamentoAbertura: {
@@ -43,9 +52,13 @@ SB_AcatamentosAbertura.init(
   }
 );
 
-SB_AcatamentosAbertura.belongsTo(SB_SolicitacaoAbertura, {
-  foreignKey: "SB_SolicitacaoAbertura_id_SolicitacaoAbertura",
-  targetKey: "id_SolicitacaoAbertura",
+SB_AcatamentosAbertura.belongsTo(SB_SolicitacaoBase, {
+  foreignKey: "SB_SolicitacaoBase_id_SolicitacaoBase",
+  targetKey: "id_SolicitacaoBase",
+});
+SB_AcatamentosAbertura.belongsTo(SB_SolicitacaoBase, {
+  foreignKey: "SB_SolicitacaoBase_id_Endereco",
+  targetKey: "SB_Endereco_id_Endereco",
 });
 
 module.exports = SB_AcatamentosAbertura;

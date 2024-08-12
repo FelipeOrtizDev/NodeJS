@@ -14,7 +14,7 @@ class SolicitacaoAberturaService {
   }
 
   async getSolicitacaoAberturaById(solicitacaoBaseId) {
-    const solicitacaoAbertura = await SB_SolicitacaoAbertura.findByOne({
+    const solicitacaoAbertura = await SB_SolicitacaoAbertura.findOne({
       where: { SB_SolicitacaoBase_id_SolicitacaoBase: solicitacaoBaseId },
     });
     return solicitacaoAbertura;

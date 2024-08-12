@@ -46,7 +46,7 @@ SB_SolicitacaoAbertura.belongsTo(SB_SolicitacaoBase, {
   targetKey: "id_SolicitacaoBase",
 });
 
-SB_SolicitacaoAbertura.bekongsTo(SB_SolicitacaoBase, {
+SB_SolicitacaoAbertura.belongsTo(SB_SolicitacaoBase, {
   foreignKey: "SB_SolicitacaoBase_id_Endereco:",
   targetKey: "SB_Endereco_id_Endereco",
 });

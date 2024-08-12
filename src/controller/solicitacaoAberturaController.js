@@ -1,5 +1,5 @@
 const SolicitacaoAberturaService = require("../service/serviceSolicitacaoAbertura");
-
+const SB_SolicitacaoBase = require("../model/solicitacaoBase");
 const getAllSolicitacoesAbertura = async (req, res) => {
   try {
     const solicitacoesAbertura =
@@ -53,6 +53,12 @@ const createSolicitacaoAbertura = async (req, res) => {
       await SolicitacaoAberturaService.createSolicitacaoAbertura(
         solicitacaoAberturaData
       );
+
+    await SB_SolicitacaoBase.update(
+      { SB_Status: "Acatado" },
+      { where: { id_SolicitacaoBase: solicitacaoBaseId } }
+    );
+
     res.status(201).send(novaSolicitacaoAbertura);
   } catch (error) {
     console.error(

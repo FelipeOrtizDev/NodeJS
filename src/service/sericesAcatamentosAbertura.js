@@ -12,6 +12,14 @@ class AcatamentosAberturaService {
       );
     }
   }
+  async getAcatamentoAberturaById(solicitacaoAberturaId) {
+    const acatamentoAbertura = await SB_AcatamentosAbertura.findOne({
+      where: {
+        SB_SolicitacaoAbertura_id_SolicitacaoAbertura: solicitacaoAberturaId,
+      },
+    });
+    return acatamentoAbertura;
+  }
 
   async createAcatamentosAbertura(acatamentoAberturaData) {
     try {

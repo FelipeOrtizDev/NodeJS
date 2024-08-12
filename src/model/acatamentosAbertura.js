@@ -44,8 +44,8 @@ SB_AcatamentosAbertura.init(
 );
 
 SB_AcatamentosAbertura.belongsTo(SB_SolicitacaoAbertura, {
-  foreignKey: " SB_SolicitacaoAbertura_id_SolicitacaoAbertura",
-  targetKey: "id_SolicitacaoAbertura"
-})
+  foreignKey: "SB_SolicitacaoAbertura_id_SolicitacaoAbertura",
+  targetKey: "id_SolicitacaoAbertura",
+});
 
 module.exports = SB_AcatamentosAbertura;

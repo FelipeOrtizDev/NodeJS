@@ -1,12 +1,16 @@
 const {
   getAllAcatamentosAbertura,
+  getAcatamentoAberturaById,
   createAcatamentosAbertura,
   updateAcatamentosAbertura,
   deleteAcatamentosAbertura,
 } = require("../controller/acatamentosAberturaController");
 
 function acatamentosAberturaRoutes(server, options, done) {
-  server.get("/acatamentosAbertura", getAllAcatamentosAbertura);
+  server.get(
+    "/acatamentosAbertura/:solicitacaoAberturaId",
+    getAcatamentoAberturaById
+  );
   server.post(
     "/acatamentosAbertura/:solicitacaoAberturaId",
     createAcatamentosAbertura

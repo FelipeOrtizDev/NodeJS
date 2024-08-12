@@ -10,6 +10,26 @@ const getAllAcatamentosAbertura = async (req, res) => {
   }
 };
 
+const getAcatamentoAberturaById = async (req, res) => {
+  const { solicitacaoAberturaId } = req.params;
+  try {
+    const acatamentoAbertura =
+      await AcatamentosAberturaService.getAcatamentoAberturaById(
+        solicitacaoAberturaId
+      );
+    if (!acatamentoAbertura) {
+      res
+        .status(404)
+        .send({ message: "Solicitacao de abertura nao encontrada" });
+    }
+    return res.status(200).send(solicitacaoAberturaId);
+  } catch (error) {
+    console.error("Erro ao Buscar Solicitacao de abertura:", error);
+    return res
+      .status(500)
+      .send({ message: "Erro ao buscar Solicitacao de abertura", error });
+  }
+};
 const createAcatamentosAbertura = async (req, res) => {
   const { solicitacaoAberturaId } = req.params;
 
@@ -69,6 +89,7 @@ const deleteAcatamentosAbertura = async (req, res) => {
 
 module.exports = {
   getAllAcatamentosAbertura,
+  getAcatamentoAberturaById,
   createAcatamentosAbertura,
   updateAcatamentosAbertura,
   deleteAcatamentosAbertura,

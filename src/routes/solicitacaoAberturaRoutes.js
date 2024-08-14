@@ -15,8 +15,8 @@ function solicitacaoAberturaRoutes(server, options, done) {
     "/solicitacaoAbertura/:solicitacaoBaseId",
     createSolicitacaoAbertura
   );
-  server.put("/solicitacoeAbertura/:id", updateSolicitacaoAbertura);
-  server.delete("/solicitacoeAbertura/:id", deleteSolicitacaoAbertura);
+  server.put("/solicitacaoAbertura/:id", updateSolicitacaoAbertura);
+  server.delete("/solicitacaoAbertura/:id", deleteSolicitacaoAbertura);
   done();
 }
 

@@ -26,7 +26,7 @@ const getAcatamentoAberturaById = async (req, res) => {
         .status(404)
         .send({ message: "Solicitacao de abertura nao encontrada" });
     }
-    return res.status(200).send(solicitacaoAberturaId);
+    return res.status(200).send(acatamentoAbertura);
   } catch (error) {
     console.error("Erro ao Buscar Solicitacao de abertura:", error);
     return res

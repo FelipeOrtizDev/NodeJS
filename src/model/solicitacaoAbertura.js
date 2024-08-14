@@ -26,7 +26,7 @@ SB_SolicitacaoAbertura.init(
     SB_Previsao: DataTypes.TIME,
     SB_ManobraWFM: DataTypes.STRING(100),
     SB_Executante: DataTypes.STRING(100),
-    SB_HFObservacaoAbertura: DataTypes.STRING(250),
+    SB_HFSObservacaoAbertura: DataTypes.STRING(250),
     SB_QTDEligacoes: DataTypes.STRING(45),
     SB_OAberto: DataTypes.STRING(100),
     SB_HSNMotivo: DataTypes.STRING(45),

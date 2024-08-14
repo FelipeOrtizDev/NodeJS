@@ -15,8 +15,8 @@ function acatamentosAberturaRoutes(server, options, done) {
     "/acatamentosAbertura/:solicitacaoBaseId",
     createAcatamentosAbertura
   );
-  server.put("/acatamentos-abertura/:id", updateAcatamentosAbertura);
-  server.delete("/acatamentos-abertura/:id", deleteAcatamentosAbertura);
+  server.put("/acatamentosAbertura/:id", updateAcatamentosAbertura);
+  server.delete("/acatamentosAbertura/:id", deleteAcatamentosAbertura);
   done();
 }
 

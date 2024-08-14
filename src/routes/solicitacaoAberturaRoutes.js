@@ -8,15 +8,15 @@ const {
 
 function solicitacaoAberturaRoutes(server, options, done) {
   server.get(
-    "/solicitacoesAbertura/:solicitacaoBaseId",
+    "/solicitacaoAbertura/:solicitacaoBaseId",
     getSolicitacaoAberturaById
   );
   server.post(
-    "/solicitacoeAbertura/:solicitacaoBaseId",
+    "/solicitacaoAbertura/:solicitacaoBaseId",
     createSolicitacaoAbertura
   );
-  server.put("/solicitacoes-abertura/:id", updateSolicitacaoAbertura);
-  server.delete("/solicitacoes-abertura/:id", deleteSolicitacaoAbertura);
+  server.put("/solicitacoeAbertura/:id", updateSolicitacaoAbertura);
+  server.delete("/solicitacoeAbertura/:id", deleteSolicitacaoAbertura);
   done();
 }
 
